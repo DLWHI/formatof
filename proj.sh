@@ -1,8 +1,8 @@
 #!/bin/bash
 BUILD_PREFIX="build-$(uname)";
 if [ $# -ne 1 ]; then
-    echo "proj: unknown action specified";
-    exit 1;
+  echo "proj: unknown action specified";
+  exit 1;
 fi;
 
 . ./project.cfg;
@@ -10,9 +10,9 @@ fi;
 COMPILER_CONFIG="-DFETCH_GTEST=$FETCH_GTEST"
 
 if [[ "echo -n I | hexdump -o | awk '{ print substr($2,6,1); exit}'" ]]; then
-    COMPILER_CONFIG+=" -DCPU_ENDIANNES=PROJ_LITTLE_ENDIAN"
+  COMPILER_CONFIG+=" -DCPU_ENDIANNES=PROJ_LITTLE_ENDIAN"
 else
-    COMPILER_CONFIG+=" -DCPU_ENDIANNES=PROJ_BIG_ENDIAN"
+  COMPILER_CONFIG+=" -DCPU_ENDIANNES=PROJ_BIG_ENDIAN"
 fi
 
 if [[ ! -z "$BUILD_GENERATOR" ]] && [[ ! -z "$MAKE_PROGRAM" ]]; then
@@ -26,27 +26,27 @@ if [[ ! -z "$C_COMPILER" ]] && [[ ! -z "$CXX_COMPILER" ]]; then
 fi
 
 if [ $1 = "init" ]; then
-    cmake -B ${BUILD_PREFIX} -S . $COMPILER_CONFIG
+  cmake -B ${BUILD_PREFIX} -S . $COMPILER_CONFIG
 elif [ $1 = "build" ]; then
-    cmake --build ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE} --target ${TARGET_NAME};
+  cmake --build ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE} --target ${TARGET_NAME};
 elif [ $1 = "test" ]; then
-    cmake --build ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE} --target unit_tests;
-    if [ $? -ne 0 ]; then
-        exit $?;
-    fi;
-    cd ${BUILD_PREFIX} && ctest
+  cmake --build ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE} --target tests;
+  if [ $? -ne 0 ]; then
+    exit $?;
+  fi;
+  cd ${BUILD_PREFIX} && ctest
 elif [ $1 = "install" ]; then
-    cmake --install ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE};
+  cmake --install ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE};
 elif [ $1 = "memcheck" ]; then
-    cmake --build ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE} --target unit_tests;
-    if [ $? -ne 0 ]; then
-        exit $?;
-    fi;
-    cd ${BUILD_PREFIX} && ctest -T memcheck
+  cmake --build ${BUILD_PREFIX} --config ${CMAKE_BUILD_TYPE} --target tests;
+  if [ $? -ne 0 ]; then
+    exit $?;
+  fi;
+  cd ${BUILD_PREFIX} && ctest -T memcheck
 elif [ $1 = "clean" ]; then
-    rm -rf ${BUILD_PREFIX};
+  rm -rf ${BUILD_PREFIX};
 else
-    echo "proj: unknown option"
+  echo "proj: unknown option"
  i   exit 1;
 fi;
 

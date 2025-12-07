@@ -1,0 +1,13 @@
+TODO List:
+  - Better approach to determine file format
+  - Concurrency support
+  - More tests
+  - Add more file types (pipes, directories, etc.)
+  CLI:
+    - Prompt to rename the file (with -r switch for auto rename and -n not to rename)
+    - Extend file format list by adding formats to .csv file (location of this file is still unknown)
+  GUI:
+    - Create gui version
+    - Auto rename switch
+    - Rename button with possibility selection
+    - Unfold directories
