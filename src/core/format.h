@@ -8,7 +8,7 @@
 
 namespace formatof {
   struct Format final {
-    using ExtensionsList = std::vector<std::string_view>;
+    using ExtensionList = std::vector<std::string_view>;
 
     static Format parse(const std::string_view& exts);
 
@@ -17,7 +17,7 @@ namespace formatof {
     std::string_view name;
     std::vector<char> signature;
     ptrdiff_t offset;
-    ExtensionsList extensions;
+    ExtensionList extensions;
   };
 
   struct FormatDescendComparator final {

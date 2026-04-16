@@ -27,8 +27,8 @@ namespace formatof {
     return r;
   }
 
-  Format::ExtensionsList parseExtensions(const std::string_view& exts) {
-    Format::ExtensionsList res;
+  Format::ExtensionList parseExtensions(const std::string_view& exts) {
+    Format::ExtensionList res;
     if (exts.empty()) {
       return res;
     }
@@ -36,7 +36,7 @@ namespace formatof {
     const char* end = first + exts.size();
     const char* last = first + 1;
     for (;first != end; first = last) {
-      first += (*first == ' ');
+      first += (*first == '|');
       for (++last ;last != end && *last != '|'; ++last);  
       std::string_view ext(first, last - first);
       res.push_back(std::move(ext));

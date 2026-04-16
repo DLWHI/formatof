@@ -29,7 +29,7 @@ class MainWindow : public QMainWindow {
 
     Ui::MainWindow* ui;
 
-    formatof::FormatList formats;
+    formatof::FormatDeterminer formats;
 };
 #endif  // FORMATOF_GUI_MAIN_WINDOW_H_ 
 

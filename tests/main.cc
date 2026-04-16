@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
-#include "format_list.h"
+#include "../src/core/format_determiner.h"
 
 struct FormatOfTestEnv : ::testing::Test {
   FormatOfTestEnv() : Test() {}
 
   void SetUp() {
-    list = new formatof::FormatList();
+    list = new formatof::FormatDeterminer();
 
     std::filesystem::path resoruce_dir(FORMATOF_RESOURCE_DIR);
 
@@ -19,16 +19,17 @@ struct FormatOfTestEnv : ::testing::Test {
     delete list;
   }
 
-  formatof::FormatList* list;
+  formatof::FormatDeterminer* list;
   std::vector<std::filesystem::path> files;
 };
 
-bool compareStrings(const std::string_view& str, const std::wstring wstr) {
-  if (str.size() != wstr.size()) {
+template <typename LhString, typename RhString>
+bool compareStrings(const LhString& lhs, const RhString& rhs) {
+  if (lhs.size() != rhs.size()) {
     return false;
   }
-  for (std::size_t i = 0; i < str.size(); ++i) {
-    if (str[i] != static_cast<char>(wstr[i])) {
+  for (std::size_t i = 0; i < lhs.size(); ++i) {
+    if (static_cast<char>(lhs[i]) != static_cast<char>(rhs[i])) {
       return false;
     }
   }
