@@ -317,7 +317,7 @@ TEST(ArgparseTest, long_option_optional_argument_present) {
   int result = argparse_long(&argobj, opts, 1);
   ASSERT_EQ(result, 0);
   ASSERT_EQ(argobj.optind, 3);
-  ASSERT_EQ(opts[result].val, "value");
+  ASSERT_STREQ(opts[result].val, "value");
   result = argparse_long(&argobj, opts, 1);
   ASSERT_EQ(result, ARGPARSE_END);
 }
@@ -495,7 +495,7 @@ TEST(ArgparseTest, short_option_optional_argument_present) {
   int result = argparse_long(&argobj, opts, 1);
   ASSERT_EQ(result, 0);
   ASSERT_EQ(argobj.optind, 3);
-  ASSERT_EQ(opts[result].val, "value");
+  ASSERT_STREQ(opts[result].val, "value");
   result = argparse_long(&argobj, opts, 1);
   ASSERT_EQ(result, ARGPARSE_END);
 }
