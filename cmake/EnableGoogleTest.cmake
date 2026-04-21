@@ -12,8 +12,8 @@ if(NOT GTest_FOUND AND FETCH_GTEST)
     EXCLUDE_FROM_ALL
   )
 
-if (WIN32)
-  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  if (WIN32)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
   endif (WIN32)
   FetchContent_MakeAvailable(googletest)
 endif()

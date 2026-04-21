@@ -1,6 +1,7 @@
 Testing
 .vscode
 *build*
+CMakeUserPresets.json
 # Prerequisites
 *.d
 

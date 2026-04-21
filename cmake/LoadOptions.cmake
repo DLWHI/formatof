@@ -13,12 +13,11 @@ function(LOAD_VARS FILE)
       string(REPLACE "${NAME}=" "" QUOTED_VALUE "${NAME_AND_VALUE}")
       string(REPLACE "\"" "" VALUE "${QUOTED_VALUE}")
       # Set the variable
+      message(STATUS "    ${NAME}=${VALUE}")
       if (NOT "${VALUE}" STREQUAL "")
         set(${NAME} "${VALUE}" CACHE STRING "" FORCE)
-        set(OPTS "${OPTS}\n${NAME}=${VALUE}")
       endif()
     endforeach()
-    message(STATUS "${OPTS}")
 endfunction()
 
 function(SET_PROJECT_OPTIONS)
